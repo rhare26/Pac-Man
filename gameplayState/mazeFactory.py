@@ -10,7 +10,7 @@ TILE_SIZE: int = 40
 BLOCK_IMAGE = "resources/wall.png"
 DOT_IMAGE = "resources/dot.png"
 ENERGIZER_IMAGE = "resources/energizer.png"
-
+FRUIT_IMAGES = "resources/cherry.png"
 
 # TODO: add a get_maze() method instead of just using constructor
 # TODO: add multiple mazes, maybe load in from file?
@@ -21,6 +21,7 @@ class MazeFactory:
         self.maze_dimension = 20
         self.blocks: list[Sprite] = []
         self.dots: list[Sprite] = []
+        self.fruits: list[Sprite] = []
         self.surface: Surface = surface
         self.matrix = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
                        3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
