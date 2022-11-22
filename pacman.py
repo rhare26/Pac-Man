@@ -34,7 +34,7 @@ def main():
     while running:
         pressed_keys = pygame.key.get_pressed()
         current_state = current_state.get_next_state(pressed_keys)
-        current_state.update_position()
+        current_state.update(pressed_keys)
         pygame.display.update()  # When done drawing to surface, update screen
         clock.tick(fps)
 
