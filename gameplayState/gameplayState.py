@@ -1,6 +1,6 @@
 import pygame as pygame
 
-from gameplayState.spriteFactory import SpriteFactory
+from gameplayState.spriteFactory import SpriteFactory, PLAYER_IMAGE
 from gameplayState.mazeFactory import MazeFactory
 from gameplayState.player import Player
 from gameplayState.ghost import Ghost
@@ -26,14 +26,10 @@ BLUE_STATE_TIME = 6000 # in milliseconds
 GHOST_WARNING_TIME = 1000
 
 MAX_FRUITS = 4
-FRUIT_POINTS = 100
+FRUIT_POINTS = 150
 POINTS_BEFORE_NEW_FRUIT = 500
 FRUIT_STATE_TIME = 7000 # in milliseconds
 
-#TODO: move this into SpriteFactory
-PLAYER_IMAGE = "resources/player.png"
-PLAYER_START_X = 380
-PLAYER_START_Y = 480
 
 
 class GameplayState(State):
@@ -61,11 +57,8 @@ class GameplayState(State):
         self.energizers = self.maze_factory.get_energizers()
         self.dots = self.maze_factory.get_dots()
 
-        # TODO: make Player part of Sprite Factory
-        self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.blocks)
-        self.player.assign_normal_image(PLAYER_IMAGE)
-
-        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.blocks, self.player, self.surface)
+        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.blocks, self.surface)
+        self.player = self.sprite_factory.get_player()
         self.ghosts: list[Ghost] = [self.sprite_factory.get_ghost()]
         self.num_current_ghosts = 1
 
@@ -201,7 +194,7 @@ class GameplayState(State):
         score_rect.bottomright = (self.surface.get_width(), self.surface.get_height())
         self.surface.blit(score_text, score_rect)
 
-        life_image = pygame.image.load(PLAYER_IMAGE)
+        life_image = pygame.image.load(PLAYER_IMAGE) # fix this
         life_rect = life_image.get_rect()
         for life in range(self.lives):
             # Draw at bottom left (move over for each new life to draw)
@@ -232,13 +225,10 @@ class GameplayState(State):
         self.energizers = self.maze_factory.get_energizers()
         self.dots = self.maze_factory.get_dots()
 
-        # TODO: make Player part of Sprite Factory
-        self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.blocks)
-        self.player.assign_normal_image(PLAYER_IMAGE)
-
-        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.blocks, self.player, self.surface)
+        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.blocks,  self.surface)
         self.ghosts: list[Ghost] = [self.sprite_factory.get_ghost()]
         self.num_current_ghosts = 1
+        self.player = self.player = self.sprite_factory.get_player()
 
         self.fruits = []
         self.num_fruits_deployed = 0
