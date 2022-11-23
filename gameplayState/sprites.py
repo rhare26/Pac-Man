@@ -66,7 +66,7 @@ class Movable(Sprite):
     def set_direction(self, direction):
         self.direction = direction
 
-    def determine_move(self, key_presses):
+    def determine_move(self, joystick_pos, key_presses):
         # player and ghosts determine moves differently
         pass
 

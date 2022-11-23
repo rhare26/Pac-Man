@@ -26,7 +26,8 @@ def main():
     fps = 15  # Max of frames per second
     clock.tick(fps)
 
-    joystick= None
+    joystick = None
+    joystick_pos = None
 
     surface = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Pac-Man")
@@ -39,15 +40,9 @@ def main():
 
     # Game Loop
     while running:
-        pressed_keys = pygame.key.get_pressed()
-        current_state = current_state.get_next_state(pressed_keys)
-        current_state.update(pressed_keys)
 
-        pygame.display.update()  # When done drawing to surface, update screen
-        clock.tick(fps)
 
         if joystick:
-
             for i in range(joystick.get_numaxes()):
                 x_dir = joystick.get_axis(0) + joystick.get_axis(2)
                 x_dir = round(x_dir)
@@ -55,7 +50,8 @@ def main():
                 y_dir = joystick.get_axis(1) + joystick.get_axis(3)
                 y_dir = round(y_dir)
 
-                print(f"x: {x_dir}, y: {y_dir}")
+                joystick_pos = (x_dir, y_dir)
+
         for event in pygame.event.get():
             if (event.type == pygame.locals.QUIT) or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 running = False
@@ -82,6 +78,15 @@ def main():
                 print(f"Joystick {event.instance_id} disconnected")
 
         pygame.event.clear()
+
+        # Send to current state
+        pressed_keys = pygame.key.get_pressed()
+        current_state = current_state.get_next_state(pressed_keys)
+        current_state.update(joystick_pos, pressed_keys)
+
+        pygame.display.update()
+        clock.tick(fps)
+
     pygame.quit()
     sys.exit()
 

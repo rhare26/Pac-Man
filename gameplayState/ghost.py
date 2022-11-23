@@ -33,7 +33,7 @@ class Ghost(Movable):
         else:
             self.strategy = RandomStrategy(self, player)
 
-    def determine_move(self, key_presses):
+    def determine_move(self, joystick_pos, key_presses):
         # make three copies to try three directions (no 180s, would get stuck moving back and forth)
         clones = [self.copy(), self.copy(), self.copy()]
 

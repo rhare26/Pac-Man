@@ -22,10 +22,11 @@ class Player(Movable):
         elif key_presses[K_DOWN]:
             self.direction = DOWN
 
-    def determine_move(self, key_presses):
+    def determine_move(self, joystick_pos, key_presses):
         #clone the player to try out new directions (light clone doesn't copy everything)
         clone: Player = self.copy()
         old_dir = self.direction
+        print(joystick_pos)
 
         clone.get_direction(key_presses)
         clone.update_position()

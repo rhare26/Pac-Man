@@ -16,7 +16,7 @@ class WinState(State):
         super().__init__(surface)
         State.win_state = self
 
-    def update(self, key_presses):
+    def update(self, joystick_pos,  key_presses):
         self.draw_center_big_message(BIG_MESSAGE)
         self.draw_center_small_message(SMALL_MESSAGE)
 

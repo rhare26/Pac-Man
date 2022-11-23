@@ -50,7 +50,6 @@ class GameplayState(State):
         self.font = pygame.font.Font(FONT_FILE, FONT_SIZE)
 
         # Maze & sprites
-        #TODO: make different mazes later and use get_maze()
         self.maze_factory = MazeFactory(self.surface)
         self.maze_factory.set_new_maze()
         self.blocks = self.maze_factory.get_blocks()
@@ -68,12 +67,12 @@ class GameplayState(State):
         self.next_state = self
 
     # STATE METHODS #
-    def update(self, key_presses):
+    def update(self, joystick_pos, key_presses):
         # Default next state if nothing is changed
         self.next_state = self  # default state if nothing changed
         self.check_substates()  # check timers for blue state and fruit state
 
-        self.move_and_draw(key_presses)  # move all sprites and blit to surface
+        self.move_and_draw(joystick_pos, key_presses)  # move all sprites and blit to surface
         self.check_collisions()  # check for collisions between player and: ghosts, dots, energizers, fruits
         self.check_conditions()  # check if time to add a new ghost, add a new fruit, or win the game
         self.update_game_stats_display()  # update score and lives display
@@ -95,7 +94,7 @@ class GameplayState(State):
             if self.fruit_state_end_time <= pygame.time.get_ticks():
                 self.fruits = []
                 self.fruit_state = False
-    def move_and_draw(self, key_presses):
+    def move_and_draw(self, joystick_pos, key_presses):
         # Update background, maze walls, and dots
         self.surface.fill(BG_COLOR)
         for s in self.blocks + self.dots + self.energizers + self.fruits:
@@ -103,10 +102,10 @@ class GameplayState(State):
 
         # Move sprites
         for s in self.ghosts:
-            s.determine_move(key_presses)
+            s.determine_move(joystick_pos, key_presses)
             s.draw()
 
-        self.player.determine_move(key_presses)
+        self.player.determine_move(joystick_pos, key_presses)
         self.player.draw()
 
     def check_collisions(self):

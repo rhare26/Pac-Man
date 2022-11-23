@@ -23,7 +23,7 @@ class State:
         self.small_font = pygame.font.Font(FONT_FILE, SMALL_FONT_SIZE)
         self.surface = surface
 
-    def update(self, key_presses):
+    def update(self, joystick_pos, key_presses):
         pass
 
     def get_next_state(self, key_presses):
