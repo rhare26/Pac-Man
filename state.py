@@ -15,6 +15,7 @@ class State:
     gameplay_state = None
     lose_state = None
     lose_life_state = None
+    win_state = None
 
     def __init__(self, surface):
 

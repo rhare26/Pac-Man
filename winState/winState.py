@@ -6,15 +6,15 @@ FONT_COLOR = (0xff, 0xff, 0xff)
 BIG_FONT_SIZE = 120
 SMALL_FONT_SIZE = 40
 FONT_FILE = 'freesansbold.ttf'
-BIG_MESSAGE = "YOU LOSE!"
+BIG_MESSAGE = "YOU WIN!"
 SMALL_MESSAGE = "PRESS SPACE BAR TO RETURN TO MENU"
 # TODO: better message
 
 
-class LoseState(State):
+class WinState(State):
     def __init__(self, surface):
         super().__init__(surface)
-        State.lose_state = self
+        State.win_state = self
 
     def update(self, key_presses):
         self.draw_center_big_message(BIG_MESSAGE)

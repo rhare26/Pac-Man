@@ -12,6 +12,7 @@ from gameplayState.gameplayState import GameplayState
 from loseState.loseState import LoseState
 from menuState.menuState import MenuState
 from state import State
+from winState.winState import WinState
 
 screen_width: int = 800
 screen_height: int = 880
@@ -28,6 +29,7 @@ def main():
     surface = pygame.display.set_mode((screen_width, screen_height))
     GameplayState(surface)
     LoseState(surface)
+    WinState(surface)
     current_state = MenuState(surface)
 
     # Game Loop

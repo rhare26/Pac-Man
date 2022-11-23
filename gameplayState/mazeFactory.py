@@ -5,6 +5,8 @@ from gameplayState.sprites import Sprite
 DOT = 0
 BLOCK = 1
 ENERGIZER = 2
+BLANK = 3
+GHOST_START = 4
 
 TILE_SIZE: int = 40
 BLOCK_IMAGE = "resources/wall.png"
@@ -29,7 +31,7 @@ class MazeFactory:
                        3, 3, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 3, 3,
                        3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3,
                        3, 3, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 3, 3,
-                       3, 3, 1, 0, 1, 1, 0, 1, 0, 3, 3, 0, 1, 0, 1, 1, 0, 1, 3, 3,
+                       3, 3, 1, 0, 1, 1, 0, 1, 0, 4, 4, 0, 1, 0, 1, 1, 0, 1, 3, 3,
                        3, 3, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 3, 3,
                        3, 3, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 3, 3,
                        3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3,
@@ -51,7 +53,7 @@ class MazeFactory:
                 self.blocks.append(Sprite(self.surface, col * TILE_SIZE, row * TILE_SIZE))
                 self.blocks[-1].assign_normal_image(BLOCK_IMAGE)
 
-            elif val == DOT:
+            elif val == 4:
                 self.dots.append(Sprite(self.surface, col * TILE_SIZE, row * TILE_SIZE))
                 self.dots[-1].assign_normal_image(DOT_IMAGE)
 
