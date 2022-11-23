@@ -1,3 +1,4 @@
+from constants import JOYSTICK_LEFT, JOYSTICK_RIGHT, JOYSTICK_UP, JOYSTICK_DOWN
 from gameplayState.sprites import collision, STILL, Movable, LEFT, RIGHT, UP, DOWN, DIRECTIONS
 from pygame import K_LEFT, K_RIGHT, K_UP, K_DOWN,  Surface
 
@@ -11,15 +12,14 @@ class Player(Movable):
         self.direction = STILL
         self.starting_direction = self.direction
 
-    #  TODO: update to joystick (logic will make better sense bc joystick can only point in one direction)
-    def get_direction(self, key_presses):
-        if key_presses[K_LEFT]:
+    def get_direction(self, joystick_pos, key_presses):
+        if key_presses[K_LEFT] or joystick_pos == JOYSTICK_LEFT:
             self.direction = LEFT
-        elif key_presses[K_RIGHT]:
+        elif key_presses[K_RIGHT] or joystick_pos == JOYSTICK_RIGHT:
             self.direction = RIGHT
-        elif key_presses[K_UP]:
+        elif key_presses[K_UP] or joystick_pos == JOYSTICK_UP:
             self.direction = UP
-        elif key_presses[K_DOWN]:
+        elif key_presses[K_DOWN] or joystick_pos == JOYSTICK_DOWN:
             self.direction = DOWN
 
     def determine_move(self, joystick_pos, key_presses):
@@ -28,12 +28,12 @@ class Player(Movable):
         old_dir = self.direction
         print(joystick_pos)
 
-        clone.get_direction(key_presses)
+        clone.get_direction(joystick_pos, key_presses)
         clone.update_position()
 
         # if current or new direction is good, update and return
         if not collision(clone, self.blocks):
-            self.get_direction(key_presses)
+            self.get_direction(joystick_pos, key_presses)
             self.update_position()
             return
 
