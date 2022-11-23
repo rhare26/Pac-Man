@@ -7,7 +7,7 @@ BIG_FONT_SIZE = 120
 SMALL_FONT_SIZE = 40
 FONT_FILE = 'freesansbold.ttf'
 BIG_MESSAGE = "YOU LOSE!"
-SMALL_MESSAGE = "PRESS SPACE BAR TO RETURN TO MENU"
+SMALL_MESSAGE = "M: MENU"
 # TODO: better message
 
 
@@ -23,7 +23,7 @@ class LoseState(State):
     def get_next_state(self, key_presses):
         # TODO: change these for hardware buttons
         # If in lose state: reset game, go to menu
-        if key_presses[K_SPACE]:
+        if key_presses[K_m]:
             self.gameplay_state = GameplayState(self.surface)
             return self.menu_state
         return self

@@ -37,10 +37,10 @@ PLAYER_START_Y = 480
 
 
 class GameplayState(State):
-    score = 0
     def __init__(self, surface: pygame.Surface):
         super().__init__(surface)
         State.gameplay_state = self
+        self.score = 0
 
         # Game variables
         self.game_over = False
@@ -57,6 +57,7 @@ class GameplayState(State):
         #TODO: make different mazes later and use get_maze()
         self.maze = MazeFactory(surface)
 
+        # TODO: make Player part of Sprite Factory
         self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.maze.blocks)
         self.player.assign_normal_image(PLAYER_IMAGE)
 
@@ -84,6 +85,14 @@ class GameplayState(State):
         if self.blue_state:
             if self.blue_state_end_time <= pygame.time.get_ticks():
                 self.end_blue_state()
+
+            #  TODO: clean this up
+            reset = True
+            for g in self.ghosts:
+                if g.is_vulnerable:
+                    reset = False
+            if reset:
+                self.blue_state = False
 
         if self.fruit_state:
             if self.fruit_state_end_time <= pygame.time.get_ticks():
@@ -198,3 +207,30 @@ class GameplayState(State):
                 alert_rect = alert_text.get_rect()
                 alert_rect.midbottom = (self.surface.get_width() / 2, self.surface.get_height())
                 self.surface.blit(alert_text, alert_rect)
+
+    #  TODO: this is duplicating constructor code, needs fix
+    def reset_keep_score(self):
+        # Game variables
+        self.game_over = False
+        self.blue_state = False
+        self.blue_state_end_time = 0
+        self.fruit_state = False
+        self.fruit_state_end_time = 0
+        self.lives = STARTING_LIVES
+
+        # Maze & sprites
+        #TODO: make different mazes later and use get_maze()
+        self.maze = MazeFactory(self.surface)
+
+        # TODO: make Player part of Sprite Factory
+        self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.maze.blocks)
+        self.player.assign_normal_image(PLAYER_IMAGE)
+
+        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.maze.blocks, self.player, self.surface)
+        self.ghosts: list[Ghost] = [self.sprite_factory.get_ghost()]
+        self.num_current_ghosts = 1
+
+        self.fruits = []
+        self.num_fruits_deployed = 0
+
+        self.next_state = self

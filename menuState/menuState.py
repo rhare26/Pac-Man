@@ -4,7 +4,7 @@ from gameplayState.gameplayState import GameplayState
 from state import State
 BG_COLOR = (0, 0, 0)
 BIG_MESSAGE = "MENU"
-SMALL_MESSAGE = "Press 's' to start new or 'c' to continue"
+SMALL_MESSAGE = "S: START | C: CONTINUE"
 # TODO: better message
 
 

@@ -53,7 +53,7 @@ class MazeFactory:
                 self.blocks.append(Sprite(self.surface, col * TILE_SIZE, row * TILE_SIZE))
                 self.blocks[-1].assign_normal_image(BLOCK_IMAGE)
 
-            elif val == 4:
+            elif val == DOT:
                 self.dots.append(Sprite(self.surface, col * TILE_SIZE, row * TILE_SIZE))
                 self.dots[-1].assign_normal_image(DOT_IMAGE)
 

@@ -7,7 +7,7 @@ BIG_FONT_SIZE = 120
 SMALL_FONT_SIZE = 40
 FONT_FILE = 'freesansbold.ttf'
 BIG_MESSAGE = "YOU WIN!"
-SMALL_MESSAGE = "PRESS SPACE BAR TO RETURN TO MENU"
+SMALL_MESSAGE = "N: NEXT LEVEL | M: MENU"
 # TODO: better message
 
 
@@ -23,10 +23,11 @@ class WinState(State):
     def get_next_state(self, key_presses):
         # TODO: change these for hardware buttons
         # If in lose state: reset game, go to menu
-        if key_presses[K_SPACE]:
-            self.gameplay_state = GameplayState(self.surface)
+        self.gameplay_state.reset_keep_score()
+        if key_presses[K_n]:
+            return self.gameplay_state
+        elif key_presses[K_m]:
             return self.menu_state
         return self
-
 
 
