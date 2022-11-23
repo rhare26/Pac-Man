@@ -5,8 +5,8 @@ from gameplayState.sprites import Sprite
 START_X = 360
 START_Y = 280
 
-GHOST_SPEEDS = [FAST_GHOST_SPEED, MED_GHOST_SPEED, MED_GHOST_SPEED, SLOW_GHOST_SPEED]
-GHOST_STRATEGIES = [RANDOM, RANDOM, CHASE, CHASE]
+GHOST_SPEEDS = [FAST_GHOST_SPEED, SLOW_GHOST_SPEED, MED_GHOST_SPEED, FAST_GHOST_SPEED]
+GHOST_STRATEGIES = [RANDOM, CHASE, CHASE, CHASE]
 GHOST_IMAGES = ["resources/ghosts/cyan.png", "resources/ghosts/orange.png", "resources/ghosts/red.png","resources/ghosts/pink.png"]
 
 FRUIT_IMAGES = ["resources/fruits/cherry.png", "resources/fruits/orange.png", "resources/fruits/strawberry.png", "resources/fruits/apple.png"]
@@ -27,7 +27,7 @@ class SpriteFactory:
             self.ghosts_to_add[i].assign_normal_image(GHOST_IMAGES[i])
 
         for i in range(0, max_fruits):
-            self.fruits_to_add.append(Sprite(surface, START_X, START_Y))
+            self.fruits_to_add.append(Sprite(surface, START_X + 20, START_Y + 120))
             self.fruits_to_add[i].assign_normal_image(FRUIT_IMAGES[i])
 
 

@@ -7,9 +7,9 @@ from pygame import Surface
 from gameplayState.ghostStrategy import GhostStrategy, ChaseStrategy, FleeStrategy, RandomStrategy
 from gameplayState.sprites import Movable, LEFT, collision, distance_to_sprite
 
-SLOW_GHOST_SPEED = 5
-MED_GHOST_SPEED = 8
-FAST_GHOST_SPEED = 10
+SLOW_GHOST_SPEED = 4
+MED_GHOST_SPEED = 5
+FAST_GHOST_SPEED = 8
 RANDOM = 0
 CHASE = 1
 FLEE = 2

@@ -20,18 +20,18 @@ STARTING_LIVES = 3
 
 DOT_POINTS = 10
 
-POINTS_BEFORE_NEW_GHOST = 100
+POINTS_BEFORE_NEW_GHOST = 300
 MAX_GHOSTS = 4
-
 ENERGIZER_POINTS = 50
-CAUGHT_BLUE_GHOST_POINTS = 200
-BLUE_STATE_TIME = 5000 # in milliseconds
+CAUGHT_BLUE_GHOST_POINTS = 150
+BLUE_STATE_TIME = 6000 # in milliseconds
 
-FRUIT_POINTS = 150
-POINTS_BEFORE_NEW_FRUIT = 300
 MAX_FRUITS = 4
+FRUIT_POINTS = 100
+POINTS_BEFORE_NEW_FRUIT = 500
+FRUIT_STATE_TIME = 7000 # in milliseconds
 
-#TODO: possibly move this into SpriteFactory instead
+#TODO: move this into SpriteFactory
 PLAYER_IMAGE = "resources/player.png"
 PLAYER_START_X = 380
 PLAYER_START_Y = 480
@@ -58,13 +58,16 @@ class GameplayState(State):
         # Maze & sprites
         #TODO: make different mazes later and use get_maze()
         self.maze = MazeFactory(surface)
+
         self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.maze.blocks)
         self.player.assign_normal_image(PLAYER_IMAGE)
+
         self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.maze.blocks, self.player, self.surface)
         self.ghosts: list[Ghost] = [self.sprite_factory.get_ghost()]
         self.num_current_ghosts = 1
+
         self.fruits = []
-        self.num_current_fruits = 0
+        self.num_fruits_deployed = 0
 
         self.next_state = self
 
@@ -74,9 +77,15 @@ class GameplayState(State):
         self.next_state = self
 
         # Check if blue state is over
+        # TODO: make these conditionals/states more streamlined
         if self.blue_state:
             if self.blue_state_end_time <= pygame.time.get_ticks():
                 self.end_blue_state()
+
+        if self.fruit_state:
+            if self.fruit_state_end_time <= pygame.time.get_ticks():
+                self.fruits = []
+                self.fruit_state = False
 
         self.move_and_draw(key_presses)
         self.check_collisions()
@@ -132,6 +141,7 @@ class GameplayState(State):
         if collided_fruit:
             self.score += FRUIT_POINTS
             self.fruits.remove(collided_fruit)
+            self.fruit_state = False
 
         if (self.num_current_ghosts < MAX_GHOSTS) and \
                 (self.score > self.num_current_ghosts * POINTS_BEFORE_NEW_GHOST):
@@ -140,11 +150,12 @@ class GameplayState(State):
         if self.maze.dots:  # no dots left
             #  TODO: check if won level
             pass
-        if (self.num_current_fruits < MAX_FRUITS) and \
-                (self.score > (self.num_current_fruits + 1) * POINTS_BEFORE_NEW_FRUIT):
-            #  TODO: check if max fruits
+        if (self.num_fruits_deployed < MAX_FRUITS) and \
+                (self.score > (self.num_fruits_deployed + 1) * POINTS_BEFORE_NEW_FRUIT):
             self.fruits.append(self.sprite_factory.get_fruit())
-            self.num_current_fruits += 1
+            self.num_fruits_deployed += 1
+            self.fruit_state_end_time = pygame.time.get_ticks() + FRUIT_STATE_TIME
+            self.fruit_state = True
     def get_next_state(self, key_presses):
         # Lose state would have already been updated when checking ghost collisions
 
@@ -156,7 +167,6 @@ class GameplayState(State):
         return self.next_state
 
     # RESETS #
-
     def end_blue_state(self):
         for g in self.ghosts:
             g.set_normal_state()
