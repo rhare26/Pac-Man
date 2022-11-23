@@ -3,7 +3,7 @@ from gameplayState.player import Player
 from gameplayState.sprites import Sprite
 
 # TODO: Make starting positions passed in from GameplayState
-PLAYER_IMAGE = "resources/player.png"
+PLAYER_IMAGE = "resources/player_right.png"
 PLAYER_START_X = 380
 PLAYER_START_Y = 480
 

@@ -6,7 +6,7 @@
 import sys
 
 import pygame
-from pygame import locals
+from pygame import locals, KEYDOWN, K_ESCAPE
 
 from gameplayState.gameplayState import GameplayState
 from loseState.loseState import LoseState
@@ -26,11 +26,17 @@ def main():
     clock = pygame.time.Clock()
     fps = 15  # Max of frames per second
     clock.tick(fps)
+
+    joystick= None
+
     surface = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("Pac-Man")
+
     GameplayState(surface)
     LoseState(surface)
     WinState(surface)
     current_state = MenuState(surface)
+
 
     # Game Loop
     while running:
@@ -41,9 +47,36 @@ def main():
         pygame.display.update()  # When done drawing to surface, update screen
         clock.tick(fps)
 
+        if joystick:
+
+            for i in range(joystick.get_numaxes()):
+                for i in range(joystick.get_numhats()):
+                    print(joystick.get_hat(i))
         for event in pygame.event.get():
-            if event.type == pygame.locals.QUIT:
+            if (event.type == pygame.locals.QUIT) or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 running = False
+            if event.type == pygame.JOYBUTTONDOWN:
+                print("Joystick button pressed.")
+                #if event.button == 0:
+                    #joystick = joysticks[event.instance_id]
+                    #if joystick.rumble(0, 0.7, 500):
+                        #print(f"Rumble effect played on joystick {event.instance_id}")
+
+            if event.type == pygame.JOYBUTTONUP:
+                print("Joystick button released.")
+
+            # Handle hotplugging
+            if event.type == pygame.JOYDEVICEADDED:
+                # This event will be generated when the program starts for every
+                # joystick, filling up the list without needing to create them manually.
+                joystick = pygame.joystick.Joystick(event.device_index)
+                print(f"{joystick.get_name()} #{joystick.get_instance_id()} connected")
+
+
+            if event.type == pygame.JOYDEVICEREMOVED:
+                del joystick
+                print(f"Joystick {event.instance_id} disconnected")
+
         pygame.event.clear()
     pygame.quit()
     sys.exit()
