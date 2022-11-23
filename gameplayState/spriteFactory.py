@@ -2,8 +2,8 @@ from gameplayState.ghost import Ghost, MED_GHOST_SPEED, SLOW_GHOST_SPEED, CHASE,
 from gameplayState.sprites import Sprite
 
 # TODO: Make starting positions passed in from GameplayState
-START_X = 360
-START_Y = 280
+GHOST_START_X = 360
+GHOST_START_Y = 280
 
 GHOST_SPEEDS = [FAST_GHOST_SPEED, SLOW_GHOST_SPEED, MED_GHOST_SPEED, FAST_GHOST_SPEED]
 GHOST_STRATEGIES = [RANDOM, CHASE, CHASE, CHASE]
@@ -22,12 +22,12 @@ class SpriteFactory:
         for i in range(0, max_ghosts):
             # TODO: make these circular arrays so you can add more than 4 without out of bounds error
             self.ghosts_to_add.append(
-                Ghost(surface, START_X, START_Y, GHOST_SPEEDS[i], blocks))
+                Ghost(surface, GHOST_START_X, GHOST_START_Y, GHOST_SPEEDS[i], blocks))
             self.ghosts_to_add[i].assign_normal_strategy(GHOST_STRATEGIES[i], player)
             self.ghosts_to_add[i].assign_normal_image(GHOST_IMAGES[i])
 
         for i in range(0, max_fruits):
-            self.fruits_to_add.append(Sprite(surface, START_X + 20, START_Y + 120))
+            self.fruits_to_add.append(Sprite(surface, GHOST_START_X + 20, GHOST_START_Y + 120))
             self.fruits_to_add[i].assign_normal_image(FRUIT_IMAGES[i])
 
 

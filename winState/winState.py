@@ -23,10 +23,11 @@ class WinState(State):
     def get_next_state(self, key_presses):
         # TODO: change these for hardware buttons
         # If in lose state: reset game, go to menu
-        self.gameplay_state.reset_keep_score()
         if key_presses[K_n]:
+            self.gameplay_state.reset_keep_score() #this must be in if statement or will be called every game loop
             return self.gameplay_state
         elif key_presses[K_m]:
+            self.gameplay_state.reset_keep_score() #this must be in if statement or will be called every game loop
             return self.menu_state
         return self
 

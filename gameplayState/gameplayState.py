@@ -6,7 +6,7 @@ from gameplayState.player import Player
 from gameplayState.ghost import Ghost
 from gameplayState.sprites import collision
 from state import State
-from pygame import Surface, K_SPACE
+from pygame import Surface, K_SPACE, K_w
 
 BG_COLOR = (0, 0, 0)
 SCORE_AREA = 80
@@ -55,13 +55,17 @@ class GameplayState(State):
 
         # Maze & sprites
         #TODO: make different mazes later and use get_maze()
-        self.maze = MazeFactory(surface)
+        self.maze_factory = MazeFactory(self.surface)
+        self.maze_factory.set_new_maze()
+        self.blocks = self.maze_factory.get_blocks()
+        self.energizers = self.maze_factory.get_energizers()
+        self.dots = self.maze_factory.get_dots()
 
         # TODO: make Player part of Sprite Factory
-        self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.maze.blocks)
+        self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.blocks)
         self.player.assign_normal_image(PLAYER_IMAGE)
 
-        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.maze.blocks, self.player, self.surface)
+        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.blocks, self.player, self.surface)
         self.ghosts: list[Ghost] = [self.sprite_factory.get_ghost()]
         self.num_current_ghosts = 1
 
@@ -101,7 +105,7 @@ class GameplayState(State):
     def move_and_draw(self, key_presses):
         # Update background, maze walls, and dots
         self.surface.fill(BG_COLOR)
-        for s in self.maze.blocks + self.maze.dots + self.maze.energizers + self.fruits:
+        for s in self.blocks + self.dots + self.energizers + self.fruits:
             s.draw()
 
         # Move sprites
@@ -114,15 +118,15 @@ class GameplayState(State):
 
     def check_collisions(self):
         # Dots
-        collided_dot = collision(self.player, self.maze.dots)
+        collided_dot = collision(self.player, self.dots)
         if collided_dot:
-            self.maze.dots.remove(collided_dot)
+            self.dots.remove(collided_dot)
             self.score += DOT_POINTS
 
         # Energizers
-        collided_energizer = collision(self.player, self.maze.energizers)
+        collided_energizer = collision(self.player, self.energizers)
         if collided_energizer:
-            self.maze.energizers.remove(collided_energizer)
+            self.energizers.remove(collided_energizer)
             self.score += ENERGIZER_POINTS
             for collided_ghost in self.ghosts:
                 collided_ghost.set_blue_state()
@@ -168,7 +172,11 @@ class GameplayState(State):
         if key_presses[K_SPACE]:
             return self.menu_state
 
-        if not self.maze.dots:  # no dots left
+        # If you press pause while in gameplay state
+        if key_presses[K_w]:
+            return self.win_state
+
+        if not self.dots:  # no dots left
             self.next_state = self.win_state
          # If not changed above, next state will still be self
         return self.next_state
@@ -219,14 +227,16 @@ class GameplayState(State):
         self.lives = STARTING_LIVES
 
         # Maze & sprites
-        #TODO: make different mazes later and use get_maze()
-        self.maze = MazeFactory(self.surface)
+        self.maze_factory.set_new_maze()
+        self.blocks = self.maze_factory.get_blocks()
+        self.energizers = self.maze_factory.get_energizers()
+        self.dots = self.maze_factory.get_dots()
 
         # TODO: make Player part of Sprite Factory
-        self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.maze.blocks)
+        self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.blocks)
         self.player.assign_normal_image(PLAYER_IMAGE)
 
-        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.maze.blocks, self.player, self.surface)
+        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.blocks, self.player, self.surface)
         self.ghosts: list[Ghost] = [self.sprite_factory.get_ghost()]
         self.num_current_ghosts = 1
 
