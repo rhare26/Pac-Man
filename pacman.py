@@ -17,7 +17,6 @@ from winState.winState import WinState
 screen_width: int = 800
 screen_height: int = 880
 
-
 def main():
     pygame.init()
     running = True
@@ -50,8 +49,13 @@ def main():
         if joystick:
 
             for i in range(joystick.get_numaxes()):
-                for i in range(joystick.get_numhats()):
-                    print(joystick.get_hat(i))
+                x_dir = joystick.get_axis(0) + joystick.get_axis(2)
+                x_dir = round(x_dir)
+
+                y_dir = joystick.get_axis(1) + joystick.get_axis(3)
+                y_dir = round(y_dir)
+
+                print(f"x: {x_dir}, y: {y_dir}")
         for event in pygame.event.get():
             if (event.type == pygame.locals.QUIT) or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 running = False
