@@ -1,5 +1,6 @@
 from constants import PLAYER_START_X, FRUIT_IMAGES, PLAYER_START_Y, GHOST_IMAGES, \
-    GHOST_START_Y, GHOST_START_X, PLAYER_IMAGE, FAST_GHOST_SPEED, SLOW_GHOST_SPEED, RANDOM, CHASE, MED_GHOST_SPEED
+    GHOST_START_Y, GHOST_START_X, FAST_GHOST_SPEED, SLOW_GHOST_SPEED, RANDOM, CHASE, MED_GHOST_SPEED, \
+    TILE_SIZE
 from gameplayState.ghost import Ghost
 from gameplayState.player import Player
 from gameplayState.sprites import Sprite
@@ -18,7 +19,6 @@ class SpriteFactory:
         self.blocks = blocks
 
         self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.blocks)
-        self.player.assign_normal_image(PLAYER_IMAGE)
 
         for i in range(0, max_ghosts):
             # TODO: make these circular arrays so you can add more than 4 without out of bounds error
@@ -28,7 +28,7 @@ class SpriteFactory:
             self.ghosts_to_add[i].assign_normal_image(GHOST_IMAGES[i])
 
         for i in range(0, max_fruits):
-            self.fruits_to_add.append(Sprite(surface, PLAYER_START_X + 20, PLAYER_START_Y)) # TODO: fix this
+            self.fruits_to_add.append(Sprite(surface, PLAYER_START_X + (TILE_SIZE / 2), PLAYER_START_Y))
             self.fruits_to_add[i].assign_normal_image(FRUIT_IMAGES[i])
 
     def get_player(self):

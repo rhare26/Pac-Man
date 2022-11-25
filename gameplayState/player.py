@@ -6,6 +6,7 @@ from gameplayState.sprites import  Movable, collision
 from constants import SPRITE_STILL,  SPRITE_MOVE_LEFT, SPRITE_MOVE_RIGHT, SPRITE_MOVE_UP, SPRITE_MOVE_DOWN
 from pygame import K_LEFT, K_RIGHT, K_UP, K_DOWN,  Surface
 
+PLAYER_ANIMATION_INTERVAL = 3
 
 class Player(Movable):
 
@@ -20,7 +21,7 @@ class Player(Movable):
         self.open = True
     def draw(self):
         self.image_counter += 1
-        if self.image_counter % 4 == 0:
+        if self.image_counter % PLAYER_ANIMATION_INTERVAL == 0:
             if self.open:
                 self.current_image = self.closed_image
                 self.open = False

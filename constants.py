@@ -4,7 +4,7 @@ STARTING_LIVES = 3
 DOT_POINTS = 10
 ENERGIZER_POINTS = 50
 
-POINTS_BEFORE_NEW_GHOST = 400
+POINTS_BEFORE_NEW_GHOST = 500
 MAX_GHOSTS = 4
 CAUGHT_BLUE_GHOST_POINTS = 150
 BLUE_STATE_TIME = 6000  # in milliseconds
@@ -12,8 +12,8 @@ GHOST_WARNING_TIME = 1000  # in milliseconds
 
 MAX_FRUITS = 4  # per level
 FRUIT_POINTS = 150
-POINTS_BEFORE_NEW_FRUIT = 500
-FRUIT_STATE_TIME = 7000  # in milliseconds
+POINTS_BEFORE_NEW_FRUIT = 700
+FRUIT_STATE_TIME = 8000  # in milliseconds
 
 # Fonts & Display
 BG_COLOR = (0, 0, 0)
@@ -23,11 +23,15 @@ SMALL_FONT_SIZE = 40
 FONT_FILE = 'freesansbold.ttf'
 SCORE_AREA = 80                 # Height of area underneath maze for lives, points, etc...
 
-# Joystick
+# Joystick & buttons
 JOYSTICK_UP = (0, -1)
 JOYSTICK_DOWN = (0, 1)
 JOYSTICK_RIGHT = (1, 0)
 JOYSTICK_LEFT = (-1, 0)
+
+MENU_BUTTON = 0
+NEW_BUTTON = 1
+CONTINUE_BUTTON = 2
 
 # Maze
 TILE_SIZE: int = 40
@@ -69,8 +73,6 @@ FAST_GHOST_SPEED = 8
 RANDOM = 0
 CHASE = 1
 FLEE = 2
-
-
 
 # Fruits & Energizers
 FRUIT_IMAGES = ["resources/fruits/cherry.png", "resources/fruits/orange.png", "resources/fruits/strawberry.png", "resources/fruits/apple.png"]

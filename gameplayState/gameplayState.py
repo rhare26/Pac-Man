@@ -16,7 +16,8 @@ class GameplayState(State):
     def __init__(self, surface: pygame.Surface):
         super().__init__(surface)
         State.gameplay_state = self
-        self.score = 0
+        self.level_score = 0
+        self.previous_levels_score = 0
 
         # Game variables
         self.game_over = False
@@ -93,13 +94,13 @@ class GameplayState(State):
         collided_dot = collision(self.player, self.dots)
         if collided_dot:
             self.dots.remove(collided_dot)
-            self.score += DOT_POINTS
+            self.level_score += DOT_POINTS
 
         # Energizers
         collided_energizer = collision(self.player, self.energizers)
         if collided_energizer:
             self.energizers.remove(collided_energizer)
-            self.score += ENERGIZER_POINTS
+            self.level_score += ENERGIZER_POINTS
             for collided_ghost in self.ghosts:
                 collided_ghost.set_blue_state()
             self.blue_state = True
@@ -110,7 +111,7 @@ class GameplayState(State):
         if collided_ghost:
             if collided_ghost.is_vulnerable:
                 collided_ghost.reset()
-                self.score += CAUGHT_BLUE_GHOST_POINTS
+                self.level_score += CAUGHT_BLUE_GHOST_POINTS
             else:
                 self.lives -= 1
                 if self.lives > 0:
@@ -121,17 +122,17 @@ class GameplayState(State):
         # Fruit
         collided_fruit = collision(self.player, self.fruits)
         if collided_fruit:
-            self.score += FRUIT_POINTS
+            self.level_score += FRUIT_POINTS
             self.fruits.remove(collided_fruit)
             self.fruit_state = False
 
     def check_conditions(self):
         if (self.num_current_ghosts < MAX_GHOSTS) and \
-                (self.score > self.num_current_ghosts * POINTS_BEFORE_NEW_GHOST):
+                (self.level_score > self.num_current_ghosts * POINTS_BEFORE_NEW_GHOST):
             self.ghosts.append(self.sprite_factory.get_ghost())
             self.num_current_ghosts += 1
         if (self.num_fruits_deployed < MAX_FRUITS) and \
-                (self.score > (self.num_fruits_deployed + 1) * POINTS_BEFORE_NEW_FRUIT):
+                (self.level_score > (self.num_fruits_deployed + 1) * POINTS_BEFORE_NEW_FRUIT):
             self.fruits.append(self.sprite_factory.get_fruit())
             self.num_fruits_deployed += 1
             self.fruit_state_end_time = pygame.time.get_ticks() + FRUIT_STATE_TIME
@@ -168,12 +169,13 @@ class GameplayState(State):
     # TODO: give margins to display score and lives
 
     def update_game_stats_display(self):
-        score_text = self.font.render(str(self.score), True, FONT_COLOR)
+        score_text = self.font.render(str(self.get_game_score()), True, FONT_COLOR)
         score_rect = score_text.get_rect()
         score_rect.bottomright = (self.surface.get_width(), self.surface.get_height())
         self.surface.blit(score_text, score_rect)
 
         life_image = pygame.image.load(PLAYER_IMAGE_OPEN) # fix this
+        life_image = pygame.transform.rotate(life_image, 180)
         life_rect = life_image.get_rect()
         for life in range(self.lives):
             # Draw at bottom left (move over for each new life to draw)
@@ -188,6 +190,8 @@ class GameplayState(State):
                 alert_rect.midbottom = (self.surface.get_width() / 2, self.surface.get_height())
                 self.surface.blit(alert_text, alert_rect)
 
+    def get_game_score(self):
+        return self.previous_levels_score + self.level_score
     #  TODO: this is duplicating constructor code, needs fix
     def reset_keep_score(self):
         # Game variables
@@ -197,6 +201,8 @@ class GameplayState(State):
         self.fruit_state = False
         self.fruit_state_end_time = 0
         self.lives = STARTING_LIVES
+        self.previous_levels_score += self.level_score
+        self.level_score = 0
 
         # Maze & sprites
         self.maze_factory.set_new_maze()
