@@ -51,9 +51,10 @@ NUM_DIR = 4
 
 # Player
 PLAYER_SPEED = 10
-PLAYER_IMAGE = "resources/player_right.png"
 PLAYER_START_X = 380
 PLAYER_START_Y = 480
+PLAYER_IMAGE_OPEN = "resources/player/open_player.png"
+PLAYER_IMAGE_CLOSED = "resources/player/closed_player.png"
 
 # Ghosts
 BLUE_IMAGE = 'resources/ghosts/blue.png'

@@ -1,11 +1,10 @@
 import pygame as pygame
-
+import constants
 from constants import MAX_GHOSTS, MAX_FRUITS, STARTING_LIVES, DOT_POINTS, ENERGIZER_POINTS, BLUE_STATE_TIME, \
     CAUGHT_BLUE_GHOST_POINTS, FRUIT_POINTS, POINTS_BEFORE_NEW_GHOST, POINTS_BEFORE_NEW_FRUIT, FRUIT_STATE_TIME, \
-    GHOST_WARNING_TIME, FONT_FILE, BIG_FONT_SIZE, SMALL_FONT_SIZE, BG_COLOR, FONT_COLOR
-from gameplayState.spriteFactory import SpriteFactory, PLAYER_IMAGE
+    GHOST_WARNING_TIME, FONT_FILE, SMALL_FONT_SIZE, BG_COLOR, FONT_COLOR, PLAYER_IMAGE_OPEN
+from gameplayState.spriteFactory import SpriteFactory
 from gameplayState.mazeFactory import MazeFactory
-from gameplayState.player import Player
 from gameplayState.ghost import Ghost
 from gameplayState.sprites import collision
 from state import State
@@ -174,7 +173,7 @@ class GameplayState(State):
         score_rect.bottomright = (self.surface.get_width(), self.surface.get_height())
         self.surface.blit(score_text, score_rect)
 
-        life_image = pygame.image.load(PLAYER_IMAGE) # fix this
+        life_image = pygame.image.load(PLAYER_IMAGE_OPEN) # fix this
         life_rect = life_image.get_rect()
         for life in range(self.lives):
             # Draw at bottom left (move over for each new life to draw)
