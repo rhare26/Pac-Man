@@ -1,20 +1,21 @@
 from pygame import Surface
 
+from constants import ENERGIZER_IMAGE, TILE_SIZE, DOT_IMAGE, BLOCK_IMAGE
 from gameplayState.sprites import Sprite
 
+# This must match the number of matrices, and the dimensions of the matrices below
+NUM_MATRICES = 3
+MATRIX_DIMENSION = 20
+
+# Meanings of the numbers in the matrix
 DOT = 0
 BLOCK = 1
 ENERGIZER = 2
 BLANK = 3
 GHOST_START = 4
 
-TILE_SIZE: int = 40
-BLOCK_IMAGE = "resources/wall.png"
-DOT_IMAGE = "resources/dot.png"
-ENERGIZER_IMAGE = "resources/energizer.png"
-
-NUM_MATRICES = 3
-
+# TODO: read in matrices from file
+# Used to create dots, blocks, and energizers
 MATRICES = [[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
              3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
              3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3,
@@ -77,9 +78,6 @@ MATRICES = [[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
              3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, ]
             ]
 
-
-# TODO: add a get_maze() method instead of just using constructor
-# TODO: add multiple mazes, maybe load in from file?
 class MazeFactory:
 
     def __init__(self, surface):
@@ -87,8 +85,7 @@ class MazeFactory:
         self.dots = None
         self.blocks = None
         self.energizers = None
-
-        self.maze_counter = 0
+        self.maze_counter = 0 # keeps track of which matrix to use when advancing to new levels or starting new games
 
     #  TODO: use python getters attribute
     def get_blocks(self):
@@ -103,15 +100,15 @@ class MazeFactory:
     def set_new_maze(self):
 
         self.energizers: list[Sprite] = []
-        maze_dimension = 20  # TODO: constant?
+
         self.blocks: list[Sprite] = []
         self.dots: list[Sprite] = []
         matrix = MATRICES[self.maze_counter % NUM_MATRICES]
         print(self.maze_counter % NUM_MATRICES)
         row = 0
         col = 0
-        while row < maze_dimension:
-            val = matrix[col + (row * maze_dimension)]
+        while row < MATRIX_DIMENSION:
+            val = matrix[col + (row * MATRIX_DIMENSION)]
             if val == BLOCK:
                 self.blocks.append(Sprite(self.surface, col * TILE_SIZE, row * TILE_SIZE))
                 self.blocks[-1].assign_normal_image(BLOCK_IMAGE)
@@ -126,7 +123,7 @@ class MazeFactory:
             col += 1
 
             # If at end of row
-            if col == maze_dimension:
+            if col == MATRIX_DIMENSION:
                 col = 0
                 row += 1
 

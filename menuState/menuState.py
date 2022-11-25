@@ -1,8 +1,8 @@
 from pygame.locals import *
 
+from constants import BG_COLOR
 from gameplayState.gameplayState import GameplayState
 from state import State
-BG_COLOR = (0, 0, 0)
 BIG_MESSAGE = "MENU"
 SMALL_MESSAGE = "S: START | C: CONTINUE"
 # TODO: better message

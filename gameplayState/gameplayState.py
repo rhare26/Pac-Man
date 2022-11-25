@@ -1,5 +1,8 @@
 import pygame as pygame
 
+from constants import MAX_GHOSTS, MAX_FRUITS, STARTING_LIVES, DOT_POINTS, ENERGIZER_POINTS, BLUE_STATE_TIME, \
+    CAUGHT_BLUE_GHOST_POINTS, FRUIT_POINTS, POINTS_BEFORE_NEW_GHOST, POINTS_BEFORE_NEW_FRUIT, FRUIT_STATE_TIME, \
+    GHOST_WARNING_TIME, FONT_FILE, BIG_FONT_SIZE, SMALL_FONT_SIZE, BG_COLOR, FONT_COLOR
 from gameplayState.spriteFactory import SpriteFactory, PLAYER_IMAGE
 from gameplayState.mazeFactory import MazeFactory
 from gameplayState.player import Player
@@ -7,28 +10,6 @@ from gameplayState.ghost import Ghost
 from gameplayState.sprites import collision
 from state import State
 from pygame import Surface, K_SPACE, K_w
-
-BG_COLOR = (0, 0, 0)
-SCORE_AREA = 80
-FONT_COLOR = (0xff, 0xff, 0xff)
-FONT_SIZE = 80
-FONT_FILE = 'freesansbold.ttf'
-
-STARTING_LIVES = 3
-
-DOT_POINTS = 10
-
-POINTS_BEFORE_NEW_GHOST = 400
-MAX_GHOSTS = 4
-ENERGIZER_POINTS = 50
-CAUGHT_BLUE_GHOST_POINTS = 150
-BLUE_STATE_TIME = 6000 # in milliseconds
-GHOST_WARNING_TIME = 1000
-
-MAX_FRUITS = 4
-FRUIT_POINTS = 150
-POINTS_BEFORE_NEW_FRUIT = 500
-FRUIT_STATE_TIME = 7000 # in milliseconds
 
 
 
@@ -47,7 +28,7 @@ class GameplayState(State):
         self.lives = STARTING_LIVES
 
         # Screen
-        self.font = pygame.font.Font(FONT_FILE, FONT_SIZE)
+        self.font = pygame.font.Font(FONT_FILE, SMALL_FONT_SIZE)
 
         # Maze & sprites
         self.maze_factory = MazeFactory(self.surface)

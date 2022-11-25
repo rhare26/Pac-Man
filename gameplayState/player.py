@@ -1,32 +1,32 @@
-from constants import JOYSTICK_LEFT, JOYSTICK_RIGHT, JOYSTICK_UP, JOYSTICK_DOWN
-from gameplayState.sprites import collision, STILL, Movable, LEFT, RIGHT, UP, DOWN, DIRECTIONS
+from constants import JOYSTICK_LEFT, JOYSTICK_RIGHT, JOYSTICK_UP, JOYSTICK_DOWN, PLAYER_SPEED
+from gameplayState.sprites import  Movable, collision
+from constants import SPRITE_STILL,  SPRITE_MOVE_LEFT, SPRITE_MOVE_RIGHT, SPRITE_MOVE_UP, SPRITE_MOVE_DOWN
 from pygame import K_LEFT, K_RIGHT, K_UP, K_DOWN,  Surface
 
-PLAYER_SPEED = 10
+
 
 
 class Player(Movable):
 
     def __init__(self, surface: Surface, x: int, y: int, blocks):
         Movable.__init__(self, surface, x, y, PLAYER_SPEED, blocks)
-        self.direction = STILL
+        self.direction = SPRITE_STILL
         self.starting_direction = self.direction
 
     def get_direction(self, joystick_pos, key_presses):
         if key_presses[K_LEFT] or joystick_pos == JOYSTICK_LEFT:
-            self.direction = LEFT
+            self.direction = SPRITE_MOVE_LEFT
         elif key_presses[K_RIGHT] or joystick_pos == JOYSTICK_RIGHT:
-            self.direction = RIGHT
+            self.direction = SPRITE_MOVE_RIGHT
         elif key_presses[K_UP] or joystick_pos == JOYSTICK_UP:
-            self.direction = UP
+            self.direction = SPRITE_MOVE_UP
         elif key_presses[K_DOWN] or joystick_pos == JOYSTICK_DOWN:
-            self.direction = DOWN
+            self.direction = SPRITE_MOVE_DOWN
 
     def determine_move(self, joystick_pos, key_presses):
         #clone the player to try out new directions (light clone doesn't copy everything)
         clone: Player = self.copy()
         old_dir = self.direction
-        print(joystick_pos)
 
         clone.get_direction(joystick_pos, key_presses)
         clone.update_position()

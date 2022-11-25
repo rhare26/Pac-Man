@@ -1,20 +1,11 @@
-from gameplayState.ghost import Ghost, MED_GHOST_SPEED, SLOW_GHOST_SPEED, CHASE, RANDOM, FAST_GHOST_SPEED
+from constants import PLAYER_START_X, FRUIT_IMAGES, PLAYER_START_Y, GHOST_IMAGES, \
+    GHOST_START_Y, GHOST_START_X, PLAYER_IMAGE, FAST_GHOST_SPEED, SLOW_GHOST_SPEED, RANDOM, CHASE, MED_GHOST_SPEED
+from gameplayState.ghost import Ghost
 from gameplayState.player import Player
 from gameplayState.sprites import Sprite
 
-# TODO: Make starting positions passed in from GameplayState
-PLAYER_IMAGE = "resources/player_right.png"
-PLAYER_START_X = 380
-PLAYER_START_Y = 480
-
-GHOST_START_X = 360
-GHOST_START_Y = 280
-
-GHOST_SPEEDS = [FAST_GHOST_SPEED, SLOW_GHOST_SPEED, MED_GHOST_SPEED, FAST_GHOST_SPEED]
-GHOST_STRATEGIES = [RANDOM, CHASE, CHASE, CHASE]
-GHOST_IMAGES = ["resources/ghosts/cyan.png", "resources/ghosts/orange.png", "resources/ghosts/red.png","resources/ghosts/pink.png"]
-
-FRUIT_IMAGES = ["resources/fruits/cherry.png", "resources/fruits/orange.png", "resources/fruits/strawberry.png", "resources/fruits/apple.png"]
+GHOST_SPEEDS = [FAST_GHOST_SPEED, SLOW_GHOST_SPEED, MED_GHOST_SPEED, FAST_GHOST_SPEED] #speeds of 4 ghosts in game
+GHOST_STRATEGIES = [RANDOM, CHASE, CHASE, CHASE] # strategies of 4 ghosts in game
 
 class SpriteFactory:
 
@@ -25,7 +16,6 @@ class SpriteFactory:
         self.surface = surface
         self.max = max_ghosts
         self.blocks = blocks
-
 
         self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.blocks)
         self.player.assign_normal_image(PLAYER_IMAGE)
@@ -48,11 +38,11 @@ class SpriteFactory:
     def get_ghost(self):
         self.counter += 1
 
-        # TODO: this always pops the last one
-        return self.ghosts_to_add.pop()
+
+        return self.ghosts_to_add.pop() # return last ghost added to list
 
     def get_fruit(self):
         self.counter += 1
 
-        # TODO: this always pops the last one
-        return self.fruits_to_add.pop()
+        # this always pops the last one
+        return self.fruits_to_add.pop() # return last fruit added to list

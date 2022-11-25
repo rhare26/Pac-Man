@@ -4,24 +4,16 @@ from random import random
 import pygame
 from pygame import Surface
 
+from constants import CHASE, BLUE_IMAGE, SPRITE_MOVE_LEFT
 from gameplayState.ghostStrategy import GhostStrategy, ChaseStrategy, FleeStrategy, RandomStrategy
-from gameplayState.sprites import Movable, LEFT, collision, distance_to_sprite
-
-SLOW_GHOST_SPEED = 4
-MED_GHOST_SPEED = 5
-FAST_GHOST_SPEED = 8
-RANDOM = 0
-CHASE = 1
-FLEE = 2
-BLUE_IMAGE = 'resources/ghosts/blue.png'
-
+from gameplayState.sprites import Movable, collision
 
 class Ghost(Movable):
     strategy: GhostStrategy
 
     def __init__(self, surface: Surface, x: int, y: int, speed: int, blocks):
         Movable.__init__(self, surface, x, y, speed, blocks)
-        self.direction = LEFT
+        self.direction = SPRITE_MOVE_LEFT
         self.starting_direction = self.direction
         self.is_vulnerable = False
 

@@ -3,11 +3,7 @@ import pygame
 
 from pygame.locals import *
 
-FONT_COLOR = (0xff, 0xff, 0xff)
-BIG_FONT_SIZE = 120
-SMALL_FONT_SIZE = 24
-FONT_FILE = 'freesansbold.ttf'
-
+from constants import FONT_FILE, BIG_FONT_SIZE, SMALL_FONT_SIZE, FONT_COLOR
 
 
 class State:

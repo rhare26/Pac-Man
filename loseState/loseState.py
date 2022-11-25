@@ -1,11 +1,7 @@
 from pygame.locals import *
 from gameplayState.gameplayState import GameplayState
 from state import State
-BG_COLOR = (0, 0, 0)
-FONT_COLOR = (0xff, 0xff, 0xff)
-BIG_FONT_SIZE = 120
-SMALL_FONT_SIZE = 40
-FONT_FILE = 'freesansbold.ttf'
+
 BIG_MESSAGE = "YOU LOSE!"
 SMALL_MESSAGE = "M: MENU"
 # TODO: better message

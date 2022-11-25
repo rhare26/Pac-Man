@@ -4,29 +4,14 @@ from random import random
 import pygame
 from pygame import Rect, Surface
 
-SPRITE_SIZE = 40
-
-#Directions (index, x movement multiplier, y movement multiplier)
-DIRECTION_INDEX = 0 # the first number of the tuple
-X_DIRECTION = 1     # the second number of the tuple
-Y_DIRECTION = 2     # the third number of the tuple
-
-LEFT = (0, -1, 0)
-UP = (1, 0, -1)
-RIGHT = (2, 1, 0)
-DOWN = (3, 0, 1)
-STILL = (4, 0, 0)
-
-DIRECTIONS = [LEFT, UP, RIGHT, DOWN]
-NUM_DIR = 4
-
+from constants import DIRECTIONS, DIRECTION_INDEX, NUM_DIR, TILE_SIZE, X_DIRECTION, Y_DIRECTION
 
 class Sprite:
     image = None
 
     def __init__(self, surface: Surface, x: int, y: int):
         self.surface: Surface = surface
-        self.rect = Rect((x, y), (SPRITE_SIZE, SPRITE_SIZE))
+        self.rect = Rect((x, y), (TILE_SIZE, TILE_SIZE))
 
     def draw(self):
         self.surface.blit(self.image, self.rect)
@@ -71,6 +56,7 @@ class Movable(Sprite):
         pass
 
     def change_direction_90_degrees(self):
+        #TODO:  Fix movable directions so they are just x and y in a list (no index numbers)
         # 1 away from current direction's index in directions array
         self.direction = DIRECTIONS[(self.direction[DIRECTION_INDEX] + 1) % NUM_DIR]
 
