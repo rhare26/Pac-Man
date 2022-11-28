@@ -55,6 +55,7 @@ class GameplayState(State):
         self.move_and_draw(joystick_pos, key_presses)  # move all sprites and blit to surface
         self.check_collisions()  # check for collisions between player and: ghosts, dots, energizers, fruits
 
+
         self.check_substates()  # check timers for blue state and fruit state
         self.check_conditions()  # check if time to add a new ghost, add a new fruit, or win the game
         self.update_game_stats_display()  # update score and lives display

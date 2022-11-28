@@ -104,7 +104,7 @@ class MazeFactory:
         self.blocks: list[Sprite] = []
         self.dots: list[Sprite] = []
         matrix = MATRICES[self.maze_counter % NUM_MATRICES]
-        print(self.maze_counter % NUM_MATRICES)
+
         row = 0
         col = 0
         while row < MATRIX_DIMENSION:
