@@ -40,8 +40,6 @@ def main():
 
     buttons = [0, 0, 0]
 
-
-
     # Game Loop
     while running:
 
@@ -55,6 +53,7 @@ def main():
 
                 joystick_pos = (x_dir, y_dir)
 
+
         for event in pygame.event.get():
             if (event.type == pygame.locals.QUIT) or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 running = False
@@ -62,10 +61,8 @@ def main():
                 buttons= [joystick.get_button(MENU_BUTTON),
                           joystick.get_button(NEW_BUTTON),
                           joystick.get_button(CONTINUE_BUTTON)]
-                print(buttons)
-
-            #if event.type == pygame.JOYBUTTONUP:
-                #print("Joystick button released.")
+            else:
+                buttons = [0, 0, 0]
 
 
             # Handle hotplugging
@@ -74,17 +71,12 @@ def main():
                 # joystick, filling up the list without needing to create them manually.
                 joystick = pygame.joystick.Joystick(event.device_index)
                 print(f"{joystick.get_name()} #{joystick.get_instance_id()} connected")
-                print(joystick.get_numbuttons())
-
-            if event.type == pygame.JOYDEVICEREMOVED:
-                del joystick
-                print(f"Joystick {event.instance_id} disconnected")
 
         pygame.event.clear()
 
         # Send to current state
         pressed_keys = pygame.key.get_pressed()
-        current_state = current_state.get_next_state(pressed_keys)
+        current_state = current_state.get_next_state(pressed_keys, buttons)
         current_state.update(joystick_pos, pressed_keys)
 
         pygame.display.update()

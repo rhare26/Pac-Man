@@ -4,7 +4,7 @@ from random import random
 import pygame
 from pygame import Surface
 
-from constants import CHASE, BLUE_IMAGE, SPRITE_MOVE_LEFT
+from constants import CHASE, BLUE_IMAGE, SPRITE_MOVE_LEFT, SLOW_GHOST_SPEED
 from gameplayState.ghostStrategy import GhostStrategy, ChaseStrategy, FleeStrategy, RandomStrategy
 from gameplayState.sprites import Movable, collision
 

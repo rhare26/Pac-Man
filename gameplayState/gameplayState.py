@@ -51,10 +51,11 @@ class GameplayState(State):
     def update(self, joystick_pos, key_presses):
         # Default next state if nothing is changed
         self.next_state = self  # default state if nothing changed
-        self.check_substates()  # check timers for blue state and fruit state
 
         self.move_and_draw(joystick_pos, key_presses)  # move all sprites and blit to surface
         self.check_collisions()  # check for collisions between player and: ghosts, dots, energizers, fruits
+
+        self.check_substates()  # check timers for blue state and fruit state
         self.check_conditions()  # check if time to add a new ghost, add a new fruit, or win the game
         self.update_game_stats_display()  # update score and lives display
 
@@ -138,14 +139,14 @@ class GameplayState(State):
             self.fruit_state_end_time = pygame.time.get_ticks() + FRUIT_STATE_TIME
             self.fruit_state = True
 
-    def get_next_state(self, key_presses):
+    def get_next_state(self, key_presses, buttons):
         # Lose state would have already been updated when checking ghost collisions
 
         # If you press pause while in gameplay state
-        if key_presses[K_SPACE]:
+        if key_presses[K_SPACE] or buttons[constants.MENU_BUTTON]:
             return self.menu_state
 
-        # If you press pause while in gameplay state
+        # If you do the cheatcode
         if key_presses[K_w]:
             return self.win_state
 

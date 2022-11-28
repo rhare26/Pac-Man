@@ -4,15 +4,15 @@ STARTING_LIVES = 3
 DOT_POINTS = 10
 ENERGIZER_POINTS = 50
 
-POINTS_BEFORE_NEW_GHOST = 500
+POINTS_BEFORE_NEW_GHOST = 270
 MAX_GHOSTS = 4
 CAUGHT_BLUE_GHOST_POINTS = 150
 BLUE_STATE_TIME = 6000  # in milliseconds
 GHOST_WARNING_TIME = 1000  # in milliseconds
 
 MAX_FRUITS = 4  # per level
-FRUIT_POINTS = 150
-POINTS_BEFORE_NEW_FRUIT = 700
+FRUIT_POINTS = 140
+POINTS_BEFORE_NEW_FRUIT = 350
 FRUIT_STATE_TIME = 8000  # in milliseconds
 
 # Fonts & Display
@@ -62,6 +62,7 @@ PLAYER_IMAGE_CLOSED = "resources/player/closed_player.png"
 
 # Ghosts
 BLUE_IMAGE = 'resources/ghosts/blue.png'
+BLUE_GHOST_SPEED = 1
 GHOST_IMAGES = ["resources/ghosts/cyan.png", "resources/ghosts/orange.png", "resources/ghosts/red.png","resources/ghosts/pink.png"]
 GHOST_START_X = 360
 GHOST_START_Y = 280

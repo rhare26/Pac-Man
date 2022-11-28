@@ -22,7 +22,7 @@ class State:
     def update(self, joystick_pos, key_presses):
         pass
 
-    def get_next_state(self, key_presses):
+    def get_next_state(self, key_presses, buttons):
         pass
 
     def draw_center_big_message(self, message):
