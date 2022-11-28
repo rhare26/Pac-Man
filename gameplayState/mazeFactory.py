@@ -14,7 +14,6 @@ ENERGIZER = 2
 BLANK = 3
 GHOST_START = 4
 
-# TODO: read in matrices from file
 # Used to create dots, blocks, and energizers
 MATRICES = [[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
              3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
@@ -78,6 +77,7 @@ MATRICES = [[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
              3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, ]
             ]
 
+
 class MazeFactory:
 
     def __init__(self, surface):
@@ -85,9 +85,8 @@ class MazeFactory:
         self.dots = None
         self.blocks = None
         self.energizers = None
-        self.maze_counter = 0 # keeps track of which matrix to use when advancing to new levels or starting new games
+        self.maze_counter = 0  # keeps track of which matrix to use when advancing to new levels or starting new games
 
-    #  TODO: use python getters attribute
     def get_blocks(self):
         return self.blocks
 

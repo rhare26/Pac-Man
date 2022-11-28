@@ -11,7 +11,6 @@ from state import State
 from pygame import Surface, K_SPACE, K_w
 
 
-
 class GameplayState(State):
     def __init__(self, surface: pygame.Surface):
         super().__init__(surface)
@@ -55,7 +54,6 @@ class GameplayState(State):
         self.move_and_draw(joystick_pos, key_presses)  # move all sprites and blit to surface
         self.check_collisions()  # check for collisions between player and: ghosts, dots, energizers, fruits
 
-
         self.check_substates()  # check timers for blue state and fruit state
         self.check_conditions()  # check if time to add a new ghost, add a new fruit, or win the game
         self.update_game_stats_display()  # update score and lives display
@@ -65,7 +63,7 @@ class GameplayState(State):
             if self.blue_state_end_time <= pygame.time.get_ticks():
                 self.end_blue_state()
 
-            #  TODO: clean this up
+
             reset = True
             for g in self.ghosts:
                 if g.is_vulnerable:
@@ -77,6 +75,7 @@ class GameplayState(State):
             if self.fruit_state_end_time <= pygame.time.get_ticks():
                 self.fruits = []
                 self.fruit_state = False
+
     def move_and_draw(self, joystick_pos, key_presses):
         # Update background, maze walls, and dots
         self.surface.fill(BG_COLOR)
@@ -153,7 +152,7 @@ class GameplayState(State):
 
         if not self.dots:  # no dots left
             self.next_state = self.win_state
-         # If not changed above, next state will still be self
+        # If not changed above, next state will still be self
         return self.next_state
 
     # RESETS #
@@ -161,14 +160,12 @@ class GameplayState(State):
         for g in self.ghosts:
             g.set_normal_state()
         self.blue_state = False
+
     def reset_all_sprites(self):
         for g in self.ghosts:
             g.reset()
         self.player.reset()
         self.fruits = []
-
-    # DISPLAYING GAME INFO #
-    # TODO: give margins to display score and lives
 
     def update_game_stats_display(self):
         score_text = self.font.render(str(self.get_game_score()), True, FONT_COLOR)
@@ -176,7 +173,7 @@ class GameplayState(State):
         score_rect.bottomright = (self.surface.get_width(), self.surface.get_height())
         self.surface.blit(score_text, score_rect)
 
-        life_image = pygame.image.load(PLAYER_IMAGE_OPEN) # fix this
+        life_image = pygame.image.load(PLAYER_IMAGE_OPEN)  # fix this
         life_image = pygame.transform.rotate(life_image, 180)
         life_rect = life_image.get_rect()
         for life in range(self.lives):
@@ -194,7 +191,7 @@ class GameplayState(State):
 
     def get_game_score(self):
         return self.previous_levels_score + self.level_score
-    #  TODO: this is duplicating constructor code, needs fix
+
     def reset_keep_score(self):
         # Game variables
         self.game_over = False
@@ -212,7 +209,7 @@ class GameplayState(State):
         self.energizers = self.maze_factory.get_energizers()
         self.dots = self.maze_factory.get_dots()
 
-        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.blocks,  self.surface)
+        self.sprite_factory = SpriteFactory(MAX_GHOSTS, MAX_FRUITS, self.blocks, self.surface)
         self.ghosts: list[Ghost] = [self.sprite_factory.get_ghost()]
         self.num_current_ghosts = 1
         self.player = self.player = self.sprite_factory.get_player()

@@ -18,6 +18,7 @@ from winState.winState import WinState
 screen_width: int = 800
 screen_height: int = 880
 
+
 def main():
     pygame.init()
     running = True
@@ -53,17 +54,15 @@ def main():
 
                 joystick_pos = (x_dir, y_dir)
 
-
         for event in pygame.event.get():
             if (event.type == pygame.locals.QUIT) or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 running = False
             if event.type == pygame.JOYBUTTONDOWN:
-                buttons= [joystick.get_button(MENU_BUTTON),
-                          joystick.get_button(NEW_BUTTON),
-                          joystick.get_button(CONTINUE_BUTTON)]
+                buttons = [joystick.get_button(MENU_BUTTON),
+                           joystick.get_button(NEW_BUTTON),
+                           joystick.get_button(CONTINUE_BUTTON)]
             else:
                 buttons = [0, 0, 0]
-
 
             # Handle hotplugging
             if event.type == pygame.JOYDEVICEADDED:

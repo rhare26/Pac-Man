@@ -5,8 +5,9 @@ from gameplayState.ghost import Ghost
 from gameplayState.player import Player
 from gameplayState.sprites import Sprite
 
-GHOST_SPEEDS = [FAST_GHOST_SPEED, SLOW_GHOST_SPEED, MED_GHOST_SPEED, FAST_GHOST_SPEED] #speeds of 4 ghosts in game
-GHOST_STRATEGIES = [RANDOM, CHASE, CHASE, CHASE] # strategies of 4 ghosts in game
+GHOST_SPEEDS = [FAST_GHOST_SPEED, SLOW_GHOST_SPEED, MED_GHOST_SPEED, FAST_GHOST_SPEED]  # speeds of 4 ghosts in game
+GHOST_STRATEGIES = [RANDOM, CHASE, CHASE, CHASE]  # strategies of 4 ghosts in game
+
 
 class SpriteFactory:
 
@@ -21,7 +22,6 @@ class SpriteFactory:
         self.player = Player(self.surface, PLAYER_START_X, PLAYER_START_Y, self.blocks)
 
         for i in range(0, max_ghosts):
-            # TODO: make these circular arrays so you can add more than 4 without out of bounds error
             self.ghosts_to_add.append(
                 Ghost(surface, GHOST_START_X, GHOST_START_Y, GHOST_SPEEDS[i], blocks))
             self.ghosts_to_add[i].assign_normal_strategy(GHOST_STRATEGIES[i], self.player)
@@ -38,11 +38,10 @@ class SpriteFactory:
     def get_ghost(self):
         self.counter += 1
 
-
-        return self.ghosts_to_add.pop() # return last ghost added to list
+        return self.ghosts_to_add.pop()  # return last ghost added to list
 
     def get_fruit(self):
         self.counter += 1
 
         # this always pops the last one
-        return self.fruits_to_add.pop() # return last fruit added to list
+        return self.fruits_to_add.pop()  # return last fruit added to list

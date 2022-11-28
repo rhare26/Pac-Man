@@ -1,6 +1,3 @@
-from math import floor
-from random import random
-
 import pygame
 from pygame import Rect, Surface
 
@@ -56,8 +53,6 @@ class Movable(Sprite):
         pass
 
     def change_direction_90_degrees(self):
-        #TODO:  Fix movable directions so they are just x and y in a list (no index numbers)
-        # 1 away from current direction's index in directions array
         self.direction = DIRECTIONS[(self.direction[DIRECTION_INDEX] + 1) % NUM_DIR]
 
     def change_direction_180_degrees(self):
@@ -69,7 +64,6 @@ class Movable(Sprite):
         self.direction = DIRECTIONS[(self.direction[DIRECTION_INDEX] + 3) % NUM_DIR]
 
     def copy(self):
-        # TODO: optimize this- call super in player.copy() and ghost.copy()
         pass
 
 

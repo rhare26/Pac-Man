@@ -6,7 +6,6 @@ from state import State
 
 BIG_MESSAGE = "YOU WIN!"
 SMALL_MESSAGE = "N/Yellow: NEXT LEVEL | M/Blue: MENU"
-# TODO: better message
 
 
 class WinState(State):
@@ -19,7 +18,6 @@ class WinState(State):
         self.draw_center_small_message(SMALL_MESSAGE)
 
     def get_next_state(self, key_presses, buttons):
-        # TODO: change these for hardware buttons
         # If in lose state: reset game, go to menu
         if key_presses[K_n] or buttons[CONTINUE_BUTTON]:
             self.gameplay_state.reset_keep_score() #this must be in if statement or will be called every game loop

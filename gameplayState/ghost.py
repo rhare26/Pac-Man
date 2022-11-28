@@ -8,6 +8,7 @@ from constants import CHASE, BLUE_IMAGE, SPRITE_MOVE_LEFT, SLOW_GHOST_SPEED
 from gameplayState.ghostStrategy import GhostStrategy, ChaseStrategy, FleeStrategy, RandomStrategy
 from gameplayState.sprites import Movable, collision
 
+
 class Ghost(Movable):
     strategy: GhostStrategy
 
@@ -42,7 +43,6 @@ class Ghost(Movable):
         # calls specific strategy to pick best valid move (eg random, chase, etc)
         self.strategy.employ(valid_moves)
 
-    # TODO: possibly move this up to Movable
     def copy(self):
         g: Ghost = Ghost(self.surface, self.rect.x, self.rect.y, self.speed, self.blocks)
         g.speed = self.speed
@@ -62,5 +62,3 @@ class Ghost(Movable):
     def reset(self):
         self.set_normal_state()
         super().reset()
-
-

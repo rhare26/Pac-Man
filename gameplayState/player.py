@@ -2,11 +2,12 @@ import pygame
 
 from constants import JOYSTICK_LEFT, JOYSTICK_RIGHT, JOYSTICK_UP, JOYSTICK_DOWN, PLAYER_SPEED, DIRECTION_INDEX, \
     PLAYER_IMAGE_OPEN, PLAYER_IMAGE_CLOSED
-from gameplayState.sprites import  Movable, collision
-from constants import SPRITE_STILL,  SPRITE_MOVE_LEFT, SPRITE_MOVE_RIGHT, SPRITE_MOVE_UP, SPRITE_MOVE_DOWN
-from pygame import K_LEFT, K_RIGHT, K_UP, K_DOWN,  Surface
+from gameplayState.sprites import Movable, collision
+from constants import SPRITE_STILL, SPRITE_MOVE_LEFT, SPRITE_MOVE_RIGHT, SPRITE_MOVE_UP, SPRITE_MOVE_DOWN
+from pygame import K_LEFT, K_RIGHT, K_UP, K_DOWN, Surface
 
 PLAYER_ANIMATION_INTERVAL = 3
+
 
 class Player(Movable):
 
@@ -19,6 +20,7 @@ class Player(Movable):
         self.current_image = pygame.image.load(PLAYER_IMAGE_OPEN)
         self.image_counter = 0
         self.open = True
+
     def draw(self):
         self.image_counter += 1
         if self.image_counter % PLAYER_ANIMATION_INTERVAL == 0:
@@ -42,7 +44,7 @@ class Player(Movable):
             self.direction = SPRITE_MOVE_DOWN
 
     def determine_move(self, joystick_pos, key_presses):
-        #clone the player to try out new directions (light clone doesn't copy everything)
+        # clone the player to try out new directions (light clone doesn't copy everything)
         clone: Player = self.copy()
         old_dir = self.direction
 
