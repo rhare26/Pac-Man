@@ -1,5 +1,5 @@
 # Pac-Man
-This is my take on the original Pac-Man game for my final project for my real-time embedded systems class. I used the Pygame library for a lot of the basic game functions, but also created some of my own custom elements. The game employes most components of the original version, including vulnerable ghosts states, fruit drops, and different levels. This code was intended to run on a Raspberry Pi with either a keyboard or a joystick and three arcade buttons. 
+This is my take on the classic Pac-Man game for my final project for my real-time embedded systems class. I used the Pygame library for a lot of the basic game functions, but also created some of my own custom elements. The game employes most components of the original version, including vulnerable ghosts states, fruit drops, and different levels. This code was intended to run on a Raspberry Pi with either a keyboard or a joystick and three arcade buttons. 
 
 The game runs with a game loop that draws the screen, updates the current state, and determines the next state. The GameplayState manages all sprites, as well as game information like rounds, lives, and points. 
 
