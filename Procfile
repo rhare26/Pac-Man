@@ -1,1 +1,1 @@
-web: python3 pacman.py
+web: python pacman.py
