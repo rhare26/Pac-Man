@@ -35,9 +35,6 @@ CONTINUE_BUTTON = 2
 
 # Maze
 TILE_SIZE: int = 40
-BLOCK_IMAGE = "resources/wall.png"
-DOT_IMAGE = "resources/dot.png"
-ENERGIZER_IMAGE = "resources/energizer.png"
 
 # Sprite Movement
 DIRECTION_INDEX = 0 # the first number of the tuple

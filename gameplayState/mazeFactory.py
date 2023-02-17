@@ -1,8 +1,11 @@
 from pygame import Surface
 
-from constants import ENERGIZER_IMAGE, TILE_SIZE, DOT_IMAGE, BLOCK_IMAGE
-from gameplayState.sprites import Sprite
 
+from gameplayState.sprites import Sprite
+from constants import TILE_SIZE
+BLOCK_IMAGE = "resources/wall.png"
+DOT_IMAGE = "resources/dot.png"
+ENERGIZER_IMAGE = "resources/energizer.png"
 # This must match the number of matrices, and the dimensions of the matrices below
 NUM_MATRICES = 3
 MATRIX_DIMENSION = 20
