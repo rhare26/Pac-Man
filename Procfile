@@ -1,1 +1,1 @@
-web: python pacman.py
+web: gunicorn wsgi:app
