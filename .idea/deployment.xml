@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="rqh5473@192.168.1.196:22 password" deleteMissingItems="true" createEmptyFolders="true" confirmBeforeUploading="false" compareModeInSync="TEXT">
+  <component name="PublishConfigData" serverName="rqh5473@192.168.1.196:22 password" deleteMissingItems="true" createEmptyFolders="true" confirmBeforeUploading="false" compareModeInSync="TEXT">
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
       <paths name="rqh5473@192.168.1.196:22 password">
@@ -11,6 +11,5 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
