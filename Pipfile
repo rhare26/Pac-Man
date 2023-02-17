@@ -48,4 +48,3 @@ yarg = "==0.1.9"
 
 [requires]
 python_version = "3.9"
-python_full_version = "3.9.0"
