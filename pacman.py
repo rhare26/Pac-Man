@@ -15,8 +15,8 @@ from menuState.menuState import MenuState
 from state import State
 from winState.winState import WinState
 
-screen_width: int = 780
-screen_height: int = 780
+screen_width: int = 800
+screen_height: int = 880
 
 
 def main():
@@ -42,7 +42,6 @@ def main():
     buttons = [0, 0, 0]
 
     # Game Loop
-
     while running:
 
         if joystick:

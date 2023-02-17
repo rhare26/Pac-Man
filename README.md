@@ -1,25 +1,14 @@
-<h1>Pac-Man</h1>
-<h3>Description</h3>
-    This project is a recreation of the classic Pac-Man game. It includes a maze for a player to navigate through using arrow keys or a joystick. The player is chased by up to four ghosts. Fruits and energizers (along with vulnerable ghosts) are also included.
+# Pac-Man
+This is my take on the classic Pac-Man game for my final project for my real-time embedded systems class. I used the Pygame library for a lot of the basic game functions, but also created some of my own custom elements. The game employes most components of the original version, including vulnerable ghosts states, fruit drops, and different levels. This code was intended to run on a Raspberry Pi with either a keyboard or a joystick and three arcade buttons. 
 
-<h3>Hardware</h3>
-    <ul>
-        <li>4gb Pi 4</li>
-        <li>Optional: EG STARTS joystick</li>
-        <li>Optional: EG STARTS joystick controller (optional)</li>
-        <li>Optional: 4 EG STARTS buttons (optional)</li>
-    </ul>
-<h3>Install</h3>
-    <ol>
-        <li>Install python 3.9.2</li>
-        <li>````pip3 install -r requirements.txt````</li>
-        <li>If receiving errors about bmps, SDl, ttf, fonts, or other, try:<br>
-    ````sudo apt install python-dev libsdl-image1.2-dev libsdl-ttf2.0-dev libfreetype6-dev````
-        <li>Optional: Attach buttons to respective ports on joystick controller: 
-            <ul>
-                <li>Menu/Blue = 0</li>
-                <li>New/Green = 1</li>
-                <li>Continue/Yellow = 2</li>
-            </ul>
-        <li>Optional: Plug joystick controller into Raspberry Pi via USB port
-    </ol>
+The game runs with a game loop that draws the screen, updates the current state, and determines the next state. The GameplayState manages all sprites, as well as game information like rounds, lives, and points. 
+
+See the link below to watch a video demo!
+
+
+
+## Demo & Screenshots
+
+[Video Demo](https://drive.google.com/file/d/11ZOHpnKfo0152jQ5bPINxcEajRLBpEvk/view?usp=sharing)
+
+![Pacman](https://user-images.githubusercontent.com/85655946/216072290-74989f73-7810-45b7-85d7-1f8cd47f0edc.png)
