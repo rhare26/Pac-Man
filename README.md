@@ -9,6 +9,6 @@ See the link below to watch a video demo!
 
 ## Demo & Screenshots
 
-[Video Demo](https://drive.google.com/file/d/11ZOHpnKfo0152jQ5bPINxcEajRLBpEvk/view?usp=sharing)
+[VIDEO DEMO](https://drive.google.com/file/d/11ZOHpnKfo0152jQ5bPINxcEajRLBpEvk/view?usp=sharing)
 
 ![Pacman](https://user-images.githubusercontent.com/85655946/216072290-74989f73-7810-45b7-85d7-1f8cd47f0edc.png)
